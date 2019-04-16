@@ -1,4 +1,4 @@
-// var config = require('./config');
+var config = require('./config');
 
 var createError = require('http-errors');
 var express = require('express');
@@ -12,16 +12,21 @@ var webRouter = require('./web_router');
 // var apiRouterV1 = require('./api_router_v1');
 
 var app = express();
+var mustacheExpress = require('mustache-express');
 
 // 静态文件目录
 app.use(express.static(path.join(__dirname, 'public')));
 
 // configuration in all env
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 // todo 修改模板
 app.set('view engine', 'html');
-app.engine('html', require('ejs-mate'));
+// app.engine('html', require('ejs-mate'));
 app.locals._layoutFile = 'layout.html';
+
+app.engine("mustache", mustacheExpress());
+app.set('views', './view');
+app.set('view engine', 'mustache');
 
 // // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
@@ -50,5 +55,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(config.port, function () {
+    console.log('NodeClub listening on port', config.port);
+    console.log('God bless love....');
+    console.log('You can debug your app with http://' + config.host + ':' + config.port);
+    console.log('');
+  });
 
 module.exports = app;

@@ -25,3 +25,6 @@ if (config.allow_sign_up) {
 // router.post('/search_pass', sign.updateSearchPass);  // 更新密码
 // router.get('/reset_pass', sign.resetPass);  // 进入重置密码页面
 // router.post('/reset_pass', sign.updatePass);  // 更新密码
+
+
+module.exports = router;

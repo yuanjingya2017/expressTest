@@ -9,7 +9,7 @@ var uuid           = require('node-uuid');
 
 //sign up
 exports.showSignup = function (req, res) {
-  res.render('sign/signup');
+  res.render('sign/signup', {name: 1});
 };
 
 exports.signup = function (req, res, next) {
