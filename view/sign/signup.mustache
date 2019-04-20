@@ -1,1 +1,19 @@
-{{name}}
+<html>
+  <head>
+  </head>
+  <body>
+    {{#code}}
+      {{loginname}}
+      {{email}}
+    {{/code}}
+    {{^code}}
+      <form action="/signup" method="post">
+        <input type="text" name="loginname" />
+        <input type="text" name="email" />
+        <input type="password" name="pass" />
+        <input type="password" name="re_pass" />
+        <input type="submit" value="Submit" />
+      </form>
+    {{/code}}
+  </body>
+</html>
