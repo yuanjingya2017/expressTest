@@ -16,4 +16,4 @@ app.route('/events')
 .post(function(req, res, next) {
   console.log('use post')
 });
-app.listen(3002, () => console.log('Example app listening on port 3000!'));
+app.listen(3002, () => console.log('Example app listening on port 3002!'));

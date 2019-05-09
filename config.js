@@ -25,7 +25,7 @@ var config = {
   auth_cookie_name: 'node_club',
 
   // 程序运行的端口
-  port: 3000,
+  port: 3002,
   // todo 什么作用？？？
   // RSS配置
   rss: {
