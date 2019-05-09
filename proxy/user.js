@@ -95,17 +95,24 @@ exports.getUserByNameAndKey = function (loginname, key, callback) {
   User.findOne({loginname: loginname, retrieve_key: key}, callback);
 };
 
-exports.newAndSave = function (name, loginname, pass, email, avatar_url, active, callback) {
+exports.newAndSave = function (loginname, pass, email, avatar_url, active, callback) {
+  console.log('loginname', loginname, 'pass', pass, 'email', email, 'avatar_url', avatar_url, 'active', active, 'newAndSave in db')
   var user         = new User();
-  user.name        = loginname;
+  // user.id = Math.round(Math.random() * 10000);
   user.loginname   = loginname;
   user.pass        = pass;
   user.email       = email;
-  user.avatar      = avatar_url;
-  user.active      = active || false;
-  user.accessToken = uuid.v4();
+  // user.avatar      = avatar_url;
+  // user.active      = active || false;
+  // user.accessToken = uuid.v4();
 
-  user.save(callback);
+  user.save(function (err, res) {
+    if (err) {
+      console.log('err' + err);
+    } else {
+      console.log('res: ' + res);
+    }
+  });
 };
 
 var makeGravatar = function (email) {

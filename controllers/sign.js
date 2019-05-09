@@ -6,7 +6,7 @@ var tools          = require('../common/tools');
 // var utility        = require('utility');
 // var authMiddleWare = require('../middlewares/auth');
 var uuid           = require('node-uuid');
-// var User           = require('../proxy').User;
+var User           = require('../proxy').User;
 
 //sign up
 exports.showSignup = function (req, res) {
@@ -18,14 +18,14 @@ exports.signup = function (req, res, next) {
   var email     = validator.trim(req.body.email).toLowerCase();
   var pass      = validator.trim(req.body.pass);
   var rePass    = validator.trim(req.body.re_pass);
-  console.log(loginname, email, pass, rePass)
   res.render('sign/signup', {
     code: 1,
     loginname: loginname,
     email: email,
     pass: pass,
     rePass: rePass
-  })
+  });
+  User.newAndSave(loginname, pass, email, false);
   // var ep = new eventproxy();
   // ep.fail(next);
   // ep.on('prop_err', function (msg) {
