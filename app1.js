@@ -63,4 +63,4 @@ app.listen(config.port, function () {
     console.log('');
   });
 
-module.exports = app;
+// module.exports = app;
