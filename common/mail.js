@@ -12,6 +12,7 @@ var async = require('async')
  * @param {Object} data 邮件对象
  */
 var sendMail = function (data) {
+  console.log(data, 'data')
   if (config.debug) {
     return;
   }
@@ -42,6 +43,7 @@ exports.sendMail = sendMail;
  * @param {String} name 接收人的用户名
  */
 exports.sendActiveMail = function (who, token, name) {
+  console.log(who, token, name, 'who, token, name')
   var from    = util.format('%s <%s>', config.name, config.mail_opts.auth.user);
   var to      = who;
   var subject = config.name + '社区帐号激活';

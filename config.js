@@ -5,6 +5,7 @@
 var path = require('path');
 
 var config = {
+  name: 'node小站',
   debug: true,
   // cdn host，如 http://cnodejs.qiniudn.com
   allow_sign_up: true,
