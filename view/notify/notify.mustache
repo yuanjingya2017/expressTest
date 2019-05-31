@@ -1,0 +1,28 @@
+<html>
+  <head>
+  </head>
+  <body>
+    {{#success}}
+      {{{success}}}
+    {{/success}}
+    {{#error}}
+      {{{error}}}
+    {{/error}}
+
+    <span id="time">3</span>s之后自动跳转
+  </body>
+  <script>
+    /** var time = 3;
+    var timeEle = document.getElementById('time')
+    setTimeout(() => {
+        window.location.href = '/login'
+      }, 3000);
+    var interval = setInterval(() => {
+      time--;
+      timeEle.innerHTML = time
+      if (time === 0) {
+        clearInterval(interval)
+      }
+    }, 1000); **/
+  </script>
+</html>
