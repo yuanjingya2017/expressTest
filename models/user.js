@@ -33,7 +33,7 @@ var UserSchema = new Schema({
   // update_at: { type: Date, default: Date.now },
   // is_star: { type: Boolean },
   // level: { type: String },
-  // active: { type: Boolean, default: false },
+  active: { type: Boolean, default: false },
 
   // receive_reply_mail: {type: Boolean, default: false },
   // receive_at_mail: { type: Boolean, default: false },
@@ -80,6 +80,7 @@ UserSchema.pre('save', function(next){
   console.log('in model');
   var now = new Date();
   this.update_at = now;
+  console.log(next, 'next')
   next();
 });
 

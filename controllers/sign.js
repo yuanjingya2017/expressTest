@@ -23,7 +23,8 @@ exports.signup = function (req, res, next) {
   ep.fail(next);
   ep.on('prop_err', function (msg) {
     res.status(422);
-    res.render('sign/signup', {error: msg, loginname: loginname, email: email});
+    console.log('error', msg, 'loginname', loginname, 'email', email)
+    res.render('sign/signup', {code: 100, error: msg, loginname: loginname, email: email});
   });
 
   // 验证信息的正确性
@@ -68,9 +69,9 @@ exports.signup = function (req, res, next) {
         }
         // 发送激活邮件
         mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret), loginname);
-        res.render('sign/signup', {
-          success: '欢迎加入 ' + config.name + '！我们已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'
-        });
+        // res.render('sign/signup', {
+        //   code: 200, success: '欢迎加入 ' + config.name + '！我们已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'
+        // });
       });
 
     }));
@@ -84,8 +85,9 @@ exports.signup = function (req, res, next) {
  * @param  {HttpResponse} res
  */
 exports.showLogin = function (req, res) {
-  req.session._loginReferer = req.headers.referer;
-  res.render('sign/signin');
+  // console.log(req, res)
+  // req.session._loginReferer = req.headers.referer;
+  res.render('sign/login');
 };
 
 /**
@@ -107,10 +109,9 @@ var notJump = [
  * @param {Function} next
  */
 exports.login = function (req, res, next) {
-  var loginname = validator.trim(req.body.name).toLowerCase();
+  var loginname = validator.trim(req.body.loginname).toLowerCase();
   var pass      = validator.trim(req.body.pass);
   var ep        = new eventproxy();
-
   ep.fail(next);
 
   if (!loginname || !pass) {
@@ -151,7 +152,8 @@ exports.login = function (req, res, next) {
       // store session cookie
       // authMiddleWare.gen_session(user, res);
       //check at some page just jump to home page
-      var refer = req.session._loginReferer || '/';
+      var refer = '/content';
+      // req.session._loginReferer || 
       for (var i = 0, len = notJump.length; i !== len; ++i) {
         if (refer.indexOf(notJump[i]) >= 0) {
           refer = '/';

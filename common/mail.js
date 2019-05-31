@@ -2,9 +2,9 @@ var mailer        = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 var config        = require('../config');
 var util          = require('util');
-// var logger = require('./logger');
+var logger = require('./logger');
 var transporter     = mailer.createTransport(smtpTransport(config.mail_opts));
-var SITE_ROOT_URL = 'http://' + config.host;
+var SITE_ROOT_URL = 'http://' + config.host + ':' + config.port;
 var async = require('async')
 
 /**
@@ -12,26 +12,26 @@ var async = require('async')
  * @param {Object} data 邮件对象
  */
 var sendMail = function (data) {
-  console.log(data, 'data')
-  if (config.debug) {
-    return;
-  }
+  // if (config.debug) {
+  //   return;
+  // }
 
   // 重试5次
   async.retry({times: 5}, function (done) {
+    console.log('sendMail')
     transporter.sendMail(data, function (err) {
       if (err) {
         // 写为日志
-        // logger.error('send mail error', err, data);
+        logger.error('send mail error', err, data);
         return done(err);
       }
       return done()
     });
   }, function (err) {
     if (err) {
-      // return logger.error('send mail finally error', err, data);
+      return logger.error('send mail finally error', err, data);
     }
-    // logger.info('send mail success', data)
+    logger.info('send mail success', data)
   })
 };
 exports.sendMail = sendMail;
@@ -52,7 +52,12 @@ exports.sendActiveMail = function (who, token, name) {
     '<a href  = "' + SITE_ROOT_URL + '/active_account?key=' + token + '&name=' + name + '">激活链接</a>' +
     '<p>若您没有在' + config.name + '社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p>' +
     '<p>' + config.name + '社区 谨上。</p>';
-
+  console.log({
+    from: from,
+    to: to,
+    subject: subject,
+    html: html
+  })
   exports.sendMail({
     from: from,
     to: to,
