@@ -66,14 +66,13 @@ var config = {
 
   // 邮箱配置
   mail_opts: {
-    host: "smtp.qq.com", // 主机
+    host: "smtp.163.com", // 主机
     secure: true, // 使用 SSL
-    // service: 'qq',
     port: 465, // SMTP 端口
     secureConnection: true, // 使用 SSL
     auth: {
-      user: '1529624928@qq.com',
-      pass: 'pklfumjahywygcgi'
+      user: '17664051304@163.com',
+      pass: '419210yjy'
     }
   },
 

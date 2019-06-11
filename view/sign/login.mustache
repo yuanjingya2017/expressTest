@@ -17,6 +17,10 @@
   </style>
   </head>
   <body>
+  {{! 约定好当code不为0的时候是有错的时候 }}
+  {{#code}}
+    {{error}}
+  {{/code}}
     <form class="contain_form" action="/login" method="post">
       <div class="form_item">
         <label for="loginname">用户名</label>

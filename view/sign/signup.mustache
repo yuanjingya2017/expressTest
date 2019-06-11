@@ -18,30 +18,33 @@
   </head>
   <body>
     {{#code}}
-      {{{success}}}
-      {{{loginname}}}
-      {{{email}}}
+      {{{error}}}
     {{/code}}
     {{^code}}
-      <form class="contain_form" action="/signup" method="post">
-        <div class="form_item">
-          <label for="loginname">用户名</label>
-          <input type="text" name="loginname" />
-        </div>
-        <div class="form_item">
-          <label for="email">邮箱</label>
-          <input type="text" name="email" />
-        </div>
-        <div class="form_item">
-          <label for="pass">密码</label>
-          <input type="password" name="pass" />
-        </div>
-        <div class="form_item">
-          <label for="re_pass">确认密码</label>
-          <input type="password" name="re_pass" />
-        </div>
-        <input  type="submit" value="Submit" />
-      </form>
+      {{#success}}
+        {{success}}
+      {{/success}}
+      {{^success}}
+        <form class="contain_form" action="/signup" method="post">
+          <div class="form_item">
+            <label for="loginname">用户名</label>
+            <input type="text" name="loginname" />
+          </div>
+          <div class="form_item">
+            <label for="email">邮箱</label>
+            <input type="text" name="email" />
+          </div>
+          <div class="form_item">
+            <label for="pass">密码</label>
+            <input type="password" name="pass" />
+          </div>
+          <div class="form_item">
+            <label for="re_pass">确认密码</label>
+            <input type="password" name="re_pass" />
+          </div>
+          <input  type="submit" value="Submit" />
+        </form>
+      {{/success}}
     {{/code}}
   </body>
 </html>
