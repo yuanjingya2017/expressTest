@@ -262,7 +262,7 @@ exports.resetPass = function (req, res, next) {
 };
 
 exports.updatePass = function (req, res, next) {
-  console.log('updatePass', req)
+  console.log('updatePass', req.body)
   var psw   = validator.trim(req.body.psw) || '';
   var repsw = validator.trim(req.body.repsw) || '';
   // var key   = validator.trim(req.body.key) || '';
