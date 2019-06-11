@@ -7,8 +7,9 @@
     "async": "^2.6.2",
     "bcryptjs": "^2.4.3",
     "ejs-mate": "^3.0.0",
+    "eventproxy": "^1.0.0",
     "express": "^4.16.4",
-    "log4js": "^0.6.29",
+    "log4js": "^0.6.38",
     "moment": "^2.24.0",
     "mongoose": "^5.5.2",
     "mustache": "^3.0.1",
@@ -16,6 +17,7 @@
     "node-uuid": "^1.4.8",
     "nodemailer": "^6.1.1",
     "nodemailer-smtp-transport": "^2.7.4",
+    "nodemon": "^1.19.1",
     "utility": "^1.16.1",
     "validator": "^5.1.0"
   },

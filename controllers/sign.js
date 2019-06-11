@@ -243,36 +243,40 @@ exports.updateSearchPass = function (req, res, next) {
 exports.resetPass = function (req, res, next) {
   var key  = validator.trim(req.query.key || '');
   var name = validator.trim(req.query.name || '');
-
-  User.getUserByNameAndKey(name, key, function (err, user) {
+  console.log(name, key)
+  User.getUserByLoginName(name, function (err, user) {
+    console.log(user)
     if (!user) {
       res.status(403);
       return res.render('notify/notify', {error: '信息有误，密码无法重置。'});
     }
-    var now = new Date().getTime();
-    var oneDay = 1000 * 60 * 60 * 24;
-    if (!user.retrieve_time || now - user.retrieve_time > oneDay) {
-      res.status(403);
-      return res.render('notify/notify', {error: '该链接已过期，请重新申请。'});
-    }
-    return res.render('sign/reset', {name: name, key: key});
+    // var now = new Date().getTime();
+    // var oneDay = 1000 * 60 * 60 * 24;
+    // if (!user.retrieve_time || now - user.retrieve_time > oneDay) {
+    //   res.status(403);
+    //   return res.render('notify/notify', {error: '该链接已过期，请重新申请。'});
+    // }
+    return res.render('sign/reset_pass', {name: name, key: key});
   });
 };
 
 exports.updatePass = function (req, res, next) {
+  console.log('updatePass', req)
   var psw   = validator.trim(req.body.psw) || '';
   var repsw = validator.trim(req.body.repsw) || '';
-  var key   = validator.trim(req.body.key) || '';
+  // var key   = validator.trim(req.body.key) || '';
   var name  = validator.trim(req.body.name) || '';
-
+  console.log(repsw, psw, 111111)
   var ep = new eventproxy();
   ep.fail(next);
-
+  console.log(repsw, psw)
   if (psw !== repsw) {
-    return res.render('sign/reset', {name: name, key: key, error: '两次密码输入不一致。'});
+    console.log('判重')
+    return res.render('notify/notify', {name: name, key: key, error: '两次密码输入不一致。'});
   }
-  User.getUserByNameAndKey(name, key, ep.done(function (user) {
+  User.getUserByLoginName(name, ep.done(function (user) {
     if (!user) {
+      console.log('错误的激活链接')
       return res.render('notify/notify', {error: '错误的激活链接'});
     }
     tools.bhash(psw, ep.done(function (passhash) {
@@ -285,6 +289,7 @@ exports.updatePass = function (req, res, next) {
         if (err) {
           return next(err);
         }
+        console.log('你的密码已重置。')
         return res.render('notify/notify', {success: '你的密码已重置。'});
       });
     }));

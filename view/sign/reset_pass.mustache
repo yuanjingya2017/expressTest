@@ -1,0 +1,54 @@
+<html>
+  <head>
+  <style>
+    .contain_form {
+      width: 50%;
+    }
+    .form_item{
+      display: flex;
+    }
+    .form_item label {
+      flex: 1;
+      text-align: right;
+    }
+    .form_item input {
+      flex: 1;
+    }
+  </style>
+  </head>
+  <body>
+    <form class="contain_form" action="/reset_pass" method="post">
+      <div class="form_item">
+        <label for="name">用户名</label>
+        <input disabled id="name" type="text" name="name" value="1111111"/>
+      </div>
+      <div class="form_item">
+        <label for="pass">密码</label>
+        <input type="password" name="pass" />
+      </div>
+      <div class="form_item">
+        <label for="repsw">确认密码</label>
+        <input type="password" name="repsw" />
+      </div>
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+  <script>
+    var name = document.getElementById('name')
+    console.log(name.innerHTML, 'name')
+    var name1
+    getQueryParam('name')
+    function getQueryParam (param) {
+      var paramArr = window.location.search.split('&')
+      paramArr.map(item => {
+        var temp = item.split('=')
+        var temp1
+        if (temp[0] === param) {
+          name1 = temp[1]
+        }
+      })
+    }
+    name.value = name1
+    console.log(name1, name.value)
+  </script>
+</html>
