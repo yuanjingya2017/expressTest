@@ -2643,3 +2643,11 @@ Error: Invalid login: 535 Error: ÇëÊ¹ÓÃÊÚÈ¨ÂëµÇÂ¼¡£ÏêÇéÇ�
   to: '17664051304@163.com',
   subject: 'Nodeclub社区帐号激活',
   html: '<p>您好：yuanjingya</p><p>我们收到您在Nodeclub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost:3002/active_account?key=570a5c7a4521d625b121721ffc1406f6&name=yuanjingya">激活链接</a><p>若您没有在Nodeclub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>Nodeclub社区 谨上。</p>' }
+[2019-06-11 15:32:08.379] [INFO] cheese - send mail success { from: 'Nodeclub <1529624928@qq.com>',
+  to: '17664051304@163.com',
+  subject: 'Nodeclub社区帐号激活',
+  html: '<p>您好：yuanjingya</p><p>我们收到您在Nodeclub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost:3002/active_account?key=9717f666751bb0a0a2e4980398ce50f4&name=yuanjingya">激活链接</a><p>若您没有在Nodeclub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>Nodeclub社区 谨上。</p>' }
+[2019-06-11 17:18:20.869] [INFO] cheese - send mail success { from: 'Nodeclub <1529624928@qq.com>',
+  to: '17664051304@163.com',
+  subject: 'Nodeclub社区密码重置',
+  html: '<p>您好：yuanjingya</p><p>我们收到您在Nodeclub社区重置密码的请求，请在24小时内单击下面的链接来重置密码：</p><a href="http://localhost:3002/reset_pass?key=62a93c7f-2412-48ac-a950-4746260bb1b8&name=yuanjingya">重置密码链接</a><p>若您没有在Nodeclub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>Nodeclub社区 谨上。</p>' }
