@@ -10,9 +10,10 @@ var uuid           = require('node-uuid');
 
 //sign up
 exports.showSignup = function (req, res) {
-  res.render('sign/signup');
+  res.render('sign/signup', { code: 0});
 };
 
+// todo ep 的用法 为什么有的用ep而有的不用？有什么区别？作用是啥？是必须的吗？什么情况下使用ep合适
 exports.signup = function (req, res, next) {
   var loginname = validator.trim(req.body.loginname).toLowerCase();
   var email     = validator.trim(req.body.email).toLowerCase();
@@ -24,7 +25,7 @@ exports.signup = function (req, res, next) {
   ep.on('prop_err', function (msg) {
     res.status(422);
     console.log('error', msg, 'loginname', loginname, 'email', email)
-    res.render('sign/signup', {code: 100, error: msg, loginname: loginname, email: email});
+    res.render('sign/signup', {code: 1, error: msg, loginname: loginname, email: email});
   });
 
   // 验证信息的正确性
@@ -69,9 +70,9 @@ exports.signup = function (req, res, next) {
         }
         // 发送激活邮件
         mail.sendActiveMail(email, utility.md5(email + passhash + config.session_secret), loginname);
-        // res.render('sign/signup', {
-        //   code: 200, success: '欢迎加入 ' + config.name + '！我们已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'
-        // });
+        res.render('sign/signup', {
+          code: 0, success: '欢迎加入 ' + config.name + '！我们已给您的注册邮箱发送了一封邮件，请点击里面的链接来激活您的帐号。'
+        });
       });
 
     }));
@@ -87,7 +88,7 @@ exports.signup = function (req, res, next) {
 exports.showLogin = function (req, res) {
   // console.log(req, res)
   // req.session._loginReferer = req.headers.referer;
-  res.render('sign/login');
+  res.render('sign/login', {code: 0});
 };
 
 /**
@@ -116,7 +117,7 @@ exports.login = function (req, res, next) {
 
   if (!loginname || !pass) {
     res.status(422);
-    return res.render('sign/signin', { error: '信息不完整。' });
+    return res.render('sign/login', {code: 1, error: '信息不完整。' });
   }
 
   var getUser;
@@ -128,7 +129,7 @@ exports.login = function (req, res, next) {
 
   ep.on('login_error', function (login_error) {
     res.status(403);
-    res.render('sign/signin', { error: '用户名或密码错误' });
+    res.render('sign/login', {code: 1, error: '用户名或密码错误' });
   });
 
   getUser(loginname, function (err, user) {
@@ -147,7 +148,7 @@ exports.login = function (req, res, next) {
         // 重新发送激活邮件
         mail.sendActiveMail(user.email, utility.md5(user.email + passhash + config.session_secret), user.loginname);
         res.status(403);
-        return res.render('sign/signin', { error: '此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。' });
+        return res.render('sign/login', {code: 1, error: '此帐号还没有被激活，激活链接已发送到 ' + user.email + ' 邮箱，请查收。' });
       }
       // store session cookie
       // authMiddleWare.gen_session(user, res);
@@ -201,13 +202,13 @@ exports.activeAccount = function (req, res, next) {
 };
 
 exports.showSearchPass = function (req, res) {
-  res.render('sign/search_pass');
+  res.render('notify/notify');
 };
 
 exports.updateSearchPass = function (req, res, next) {
   var email = validator.trim(req.body.email).toLowerCase();
   if (!validator.isEmail(email)) {
-    return res.render('sign/search_pass', {error: '邮箱不合法', email: email});
+    return res.render('notify/notify', {error: '邮箱不合法', email: email});
   }
 
   // 动态生成retrive_key和timestamp到users collection,之后重置密码进行验证
@@ -216,7 +217,7 @@ exports.updateSearchPass = function (req, res, next) {
 
   User.getUserByMail(email, function (err, user) {
     if (!user) {
-      res.render('sign/search_pass', {error: '没有这个电子邮箱。', email: email});
+      res.render('notify/notify', {error: '没有这个电子邮箱。', email: email});
       return;
     }
     user.retrieve_key = retrieveKey;
@@ -261,7 +262,7 @@ exports.resetPass = function (req, res, next) {
 };
 
 exports.updatePass = function (req, res, next) {
-  console.log('updatePass', req)
+  console.log('updatePass', req.body)
   var psw   = validator.trim(req.body.psw) || '';
   var repsw = validator.trim(req.body.repsw) || '';
   // var key   = validator.trim(req.body.key) || '';

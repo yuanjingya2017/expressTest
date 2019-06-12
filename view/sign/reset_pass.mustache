@@ -20,11 +20,11 @@
     <form class="contain_form" action="/reset_pass" method="post">
       <div class="form_item">
         <label for="name">用户名</label>
-        <input disabled id="name" type="text" name="name" value="1111111"/>
+        <input id="name" type="text" name="name" value="1111111"/>
       </div>
       <div class="form_item">
-        <label for="pass">密码</label>
-        <input type="password" name="pass" />
+        <label for="psw">密码</label>
+        <input type="password" name="psw" />
       </div>
       <div class="form_item">
         <label for="repsw">确认密码</label>
@@ -34,17 +34,20 @@
     </form>
   </body>
   <script>
-    var name = document.getElementById('name')
-    console.log(name.innerHTML, 'name')
     var name1
-    getQueryParam('name')
+    var name
+    window.onload = function () {
+      name = document.getElementById('name')
+      console.log(document.getElementById('name').value, 'name')
+      getQueryParam('name')
+    }
     function getQueryParam (param) {
       var paramArr = window.location.search.split('&')
       paramArr.map(item => {
         var temp = item.split('=')
         var temp1
         if (temp[0] === param) {
-          name1 = temp[1]
+          document.getElementById('name').value = temp[1]
         }
       })
     }
