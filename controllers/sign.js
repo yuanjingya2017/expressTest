@@ -202,7 +202,7 @@ exports.activeAccount = function (req, res, next) {
 };
 
 exports.showSearchPass = function (req, res) {
-  res.render('notify/notify');
+  res.render('sign/search_pass');
 };
 
 exports.updateSearchPass = function (req, res, next) {

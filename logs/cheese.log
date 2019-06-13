@@ -3067,3 +3067,7 @@ Error: Invalid login: 535 Error: ÇëÊ¹ÓÃÊÚÈ¨ÂëµÇÂ¼¡£ÏêÇéÇ�
   to: '17664051304@163.com',
   subject: 'Nodeclub社区帐号激活',
   html: '<p>您好：yuanjingya1</p><p>我们收到您在Nodeclub社区的注册信息，请点击下面的链接来激活帐户：</p><a href  = "http://localhost:3002/active_account?key=3c45e259d41604b98da48ac3ca01a8ba&name=yuanjingya1">激活链接</a><p>若您没有在Nodeclub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>Nodeclub社区 谨上。</p>' }
+[2019-06-12 11:40:30.112] [INFO] cheese - send mail success { from: 'Nodeclub <17664051304@163.com>',
+  to: '17664051304@163.com',
+  subject: 'Nodeclub社区密码重置',
+  html: '<p>您好：yuanjingya</p><p>我们收到您在Nodeclub社区重置密码的请求，请在24小时内单击下面的链接来重置密码：</p><a href="http://localhost:3002/reset_pass?key=b3b52347-94ee-4f90-b372-67bad29db730&name=yuanjingya">重置密码链接</a><p>若您没有在Nodeclub社区填写过注册信息，说明有人滥用了您的电子邮箱，请删除此邮件，我们对给您造成的打扰感到抱歉。</p><p>Nodeclub社区 谨上。</p>' }
