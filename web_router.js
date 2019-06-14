@@ -8,7 +8,7 @@ var router = express.Router();
 
 // sign controller
 if (config.allow_sign_up) {
-  router.get('/', sign.showSignup);
+  router.get('/', sign.showLogin);
   router.get('/signup', sign.showSignup);  // 跳转到注册页面
   router.post('/signup', sign.signup);  // 提交注册信息
 }
