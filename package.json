@@ -19,7 +19,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^1.19.1",
     "utility": "^1.16.1",
-    "validator": "^5.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {},
   "scripts": {
